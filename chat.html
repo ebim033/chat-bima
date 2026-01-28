@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Private</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>
+  if (!localStorage.getItem("chatUser")) {
+    window.location.href = "index.html";
+  }
+</script>
+
+<div class="chat-box">
+
+  <div class="chat-header">
+    <span id="userDisplay"></span>
+    <button class="gear-btn" onclick="toggleMenu()">⚙️</button>
+  </div>
+
+  <div id="messages"></div>
+
+  <div class="chat-input">
+    <div class="file-input-container">
+      <button class="attach-btn" id="attachBtn" title="Lampirkan file"></button>
+      <input type="file" id="fileInput" accept="image/*,video/*" style="display: none;">
+    </div>
+    <input type="text" id="message" placeholder="Ketik pesan...">
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="sendMessage()">Kirim</button>
+  </div>
+
+  <div id="menuPanel" class="menu hidden">
+    <button class="danger" onclick="clearChat()">Hapus Semua Chat</button>
+     <button onclick="setTheme('light')">☀️ Mode Terang</button>
+      <button onclick="setTheme('dark')">🌙 Mode Gelap</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+</div>
+
+<!-- Tambahkan Firebase Storage library -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="script.js"></script>
+<audio id="notifSound" src="notif.mp3" preload="auto"></audio>
+
+</body>
+</html>

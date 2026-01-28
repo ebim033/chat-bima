@@ -1,0 +1,510 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  margin: 0;
+  padding: 0;
+}
+
+.login-box, .chat-box {
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  margin: 0;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4f46e5;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.logout-btn {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* CHAT AREA */
+#messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f9fafb;
+}
+
+/* CHAT BUBBLE */
+.bubble {
+  max-width: 75%;
+  padding: 8px 12px;
+  border-radius: 14px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  display: block;
+}
+.msg-wrapper {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.msg-wrapper.right {
+  justify-content: flex-end;
+}
+
+.msg-wrapper.left {
+  justify-content: flex-start;
+}
+
+/* warna */
+.right .bubble {
+  background: #4f46e5;
+  color: white;
+}
+
+.left .bubble {
+  background: #e5e7eb;
+  color: #111;
+}
+
+.me{
+  background: #4f46e5;
+  color: white;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.other{
+  background: #4f46e5;
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 2px;
+}
+
+.msg-wrapper.left .bubble {
+  background: #e5e7eb;
+  color: #111;
+  margin-right: auto;
+  border-bottom-left-radius: 2px;
+}
+
+/* INPUT */
+.chat-input {
+  display: flex;
+  gap: 5px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* BUTTONS */
+button {
+  cursor: pointer;
+}
+
+button.danger {
+  margin-top: 8px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* LOGIN */
+.login-box h2 {
+  text-align: center;
+}
+
+.login-box input {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.login-box button {
+  width: 100%;
+  margin-top: 10px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+}
+/* SETTINGS */
+.gear-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
+.menu {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
+}
+body {
+  min-height: 100vh;
+}
+
+.login-box {
+  max-width: 360px;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+/* ===== MOBILE FIX (HP) ===== */
+@media (max-width: 768px) {
+
+  /* area chat */
+  #messages {
+    padding: 12px;
+  }
+
+  /* bubble chat biar lebih gede */
+  .bubble {
+    max-width: 85%;
+    font-size: 16px;       /* ⬅️ teks lebih besar */
+    padding: 10px 14px;    /* ⬅️ bubble lebih enak */
+    line-height: 1.5;
+  }
+
+  /* kolom input bawah */
+  .input-area,
+  .input-box,
+  .chat-input {
+    padding: 8px;
+  }
+
+  .chat-input input {
+    font-size: 16px; /* ⬅️ PENTING biar HP gak zoom */
+    padding: 10px;
+  }
+
+  .chat-input button {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+}
+.msg-wrapper {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.msg-wrapper.right {
+  justify-content: flex-end;
+}
+
+.msg-wrapper.left {
+  justify-content: flex-start;
+}
+/* ===== LOGIN PAGE ===== */
+.login-page {
+  margin: 0;
+  height: 100vh;
+  background: #0f172a;
+  font-family: Arial, sans-serif;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 360px;
+  background: #111827;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.login-box h2 {
+  color: white;
+  margin-bottom: 16px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+/* ===== THEME MODE ===== */
+
+/* DEFAULT (LIGHT) */
+body.light {
+  background: #f3f4f6;
+}
+
+body.light .chat-box {
+  background: #ffffff;
+}
+
+body.light #messages {
+  background: #f9fafb;
+}
+
+/* DARK MODE */
+body.dark {
+  background: #0f172a;
+}
+
+body.dark .chat-box {
+  background: #020617;
+}
+
+body.dark #messages {
+  background: #020617;
+}
+
+/* bubble tetap aman */
+body.dark .left .bubble {
+  background: #1f2933;
+  color: #e5e7eb;
+}
+
+body.dark .right .bubble {
+  background: #4f46e5;
+  color: white;
+}
+
+/* menu */
+body.dark .menu {
+  background: #1f2933;
+}
+
+body.dark .menu button {
+  background: #111827;
+  color: white;
+}
+/* ... kode CSS yang sudah ada tetap dipertahankan ... */
+
+/* Tambahkan di akhir file */
+
+/* FILE INPUT DAN UPLOAD */
+.file-input-container {
+  position: relative;
+  display: inline-block;
+}
+
+.file-input-container input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.attach-btn {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* MEDIA BUBBLE */
+.media-bubble {
+  max-width: 250px !important;
+  padding: 10px !important;
+}
+
+.media-container {
+  margin-top: 5px;
+}
+
+.chat-image {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.chat-image:hover {
+  transform: scale(1.02);
+}
+
+.chat-video {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.file-name {
+  word-break: break-all;
+  margin-top: 5px;
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+/* UPLOAD INDICATOR */
+.upload-indicator {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.upload-progress {
+  background: #e5e7eb;
+  border-radius: 10px;
+  padding: 8px 12px;
+  width: 80%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.upload-bar {
+  height: 4px;
+  background: #4f46e5;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.3s;
+  margin-bottom: 5px;
+}
+
+.upload-progress span {
+  font-size: 0.9em;
+  color: #6b7280;
+}
+
+/* DARK MODE MEDIA */
+body.dark .upload-progress {
+  background: #374151;
+}
+
+body.dark .upload-progress span {
+  color: #d1d5db;
+}
+
+/* MODAL MEDIA */
+.media-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.media-modal img,
+.media-modal video {
+  max-width: 95%;
+  max-height: 95%;
+  object-fit: contain;
+}
+
+/* MOBILE RESPONSIVE MEDIA */
+@media (max-width: 768px) {
+  .chat-image {
+    max-height: 150px;
+  }
+  
+  .chat-video {
+    max-height: 150px;
+  }
+  
+  .media-bubble {
+    max-width: 200px !important;
+  }
+  
+  .upload-progress {
+    width: 90%;
+  }
+}
+
+/* ICON UNTUK ATTACH BUTTON */
+.attach-btn::before {
+  content: "📎";
+}
+.chat-image {
+  max-width: 220px;
+  border-radius: 12px;
+  margin: 4px;
+}
