@@ -5,49 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chat Private</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
 </head>
-<body>
-
-<script>
-  if (!localStorage.getItem("chatUser")) {
-    window.location.href = "index.html";
-  }
-</script>
+<body class="light">
 
 <div class="chat-box">
-
+  
+  <!-- Header -->
   <div class="chat-header">
-    <span id="userDisplay"></span>
-    <button class="gear-btn" onclick="toggleMenu()">⚙️</button>
+    <span id="userDisplay">Loading...</span>
+    <button class="gear-btn" onclick="toggleMenu()" aria-label="Pengaturan">⚙️</button>
   </div>
 
-  <div id="messages"></div>
+  <!-- Messages Container -->
+  <div id="messages">
+    <!-- Pesan akan dimuat di sini oleh JavaScript -->
+  </div>
 
+  <!-- Input Area -->
   <div class="chat-input">
-    <div class="file-input-container">
-      <button class="attach-btn" id="attachBtn" title="Lampirkan file"></button>
-      <input type="file" id="fileInput" accept="image/*,video/*" style="display: none;">
-    </div>
-    <input type="text" id="message" placeholder="Ketik pesan...">
-    <input type="file" id="imageInput" accept="image/*">
+    <input type="text" id="message" placeholder="Ketik pesan..." onkeypress="if(event.key === 'Enter') sendMessage()">
     <button onclick="sendMessage()">Kirim</button>
   </div>
 
+  <!-- Menu Panel -->
   <div id="menuPanel" class="menu hidden">
-    <button class="danger" onclick="clearChat()">Hapus Semua Chat</button>
-     <button onclick="setTheme('light')">☀️ Mode Terang</button>
-      <button onclick="setTheme('dark')">🌙 Mode Gelap</button>
-    <button onclick="logout()">Logout</button>
+    <button onclick="setTheme('light')">☀️ Mode Terang</button>
+    <button onclick="setTheme('dark')">🌙 Mode Gelap</button>
+    <button class="danger" onclick="clearChat()">🗑️ Hapus Semua Chat</button>
+    <button onclick="logout()">🚪 Logout</button>
   </div>
 
 </div>
 
-<!-- Tambahkan Firebase Storage library -->
+<!-- Firebase Libraries -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+<!-- JavaScript -->
 <script src="script.js"></script>
-<audio id="notifSound" src="notif.mp3" preload="auto"></audio>
+
+<!-- Notification Sound -->
+<audio id="notifSound" preload="auto">
+  <source src="notif.mp3" type="audio/mpeg">
+</audio>
 
 </body>
 </html>
