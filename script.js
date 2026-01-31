@@ -14,7 +14,7 @@ const db = firebase.database();
 
 /**************** ADMIN CONFIG ****************/
 /* 👉 UBAH USERNAME DI SINI */
-const ADMIN_USERS = ["admin", "owner"];
+const ADMIN_USERS = ["admin", "owner", "bimma033"];
 
 /**************** REGISTER / LOGIN ****************/
 let isRegister = false;
