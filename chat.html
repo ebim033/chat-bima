@@ -1,147 +1,42 @@
-/**************** FIREBASE CONFIG ****************/
-const firebaseConfig = {
-  apiKey: "AIzaSyD7kN9qyueYOkc456U1QEWemSZryKzOeSk",
-  authDomain: "chat-76acf.firebaseapp.com",
-  databaseURL:
-    "https://chat-76acf-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "chat-76acf",
-  messagingSenderId: "432041937284",
-  appId: "1:432041937284:web:863da20e5d50db1519b5d1",
-};
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat Room</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+<body class="light">
+  <div class="chat-box">
+    <!-- HEADER -->
+    <div class="chat-header">
+      <div id="userDisplay">Loading...</div>
+      <button class="gear-btn" onclick="toggleMenu()">⚙️</button>
+    </div>
 
-/**************** LOGIN / REGISTER ****************/
-let isRegister = false;
+    <!-- MESSAGES AREA -->
+    <div id="messages"></div>
 
-function toggleForm() {
-  isRegister = !isRegister;
-  document.getElementById("formTitle").innerText = isRegister
-    ? "Register"
-    : "Login";
-  document.querySelector("button").innerText = isRegister
-    ? "Daftar"
-    : "Masuk";
-  document.getElementById("toggleText").innerText = isRegister
-    ? "Sudah punya akun?"
-    : "Belum punya akun?";
-  document.getElementById("error").innerText = "";
-}
+    <!-- MENU PANEL -->
+    <div id="menuPanel" class="menu hidden">
+      <button onclick="setTheme('light')">☀️ Mode Terang</button>
+      <button onclick="setTheme('dark')">🌙 Mode Gelap</button>
+      <button class="danger" onclick="clearChat()">🗑️ Hapus Semua Chat</button>
+      <button class="logout-btn" onclick="logout()">🚪 Keluar</button>
+    </div>
 
-function handleSubmit() {
-  const username = document.getElementById("username")?.value.trim();
-  const password = document.getElementById("password")?.value.trim();
-  const error = document.getElementById("error");
+    <!-- INPUT AREA -->
+    <div class="chat-input">
+      <input type="text" id="message" placeholder="Ketik pesan..." autocomplete="off" />
+      <button onclick="sendMessage()">Kirim</button>
+    </div>
+  </div>
 
-  if (!username || !password) return;
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-  const userRef = db.ref("users/" + username);
-
-  if (isRegister) {
-    userRef.once("value", (snap) => {
-      if (snap.exists()) {
-        error.innerText = "Username sudah digunakan";
-      } else {
-        userRef.set({
-          password,
-          createdAt: Date.now(),
-        });
-        localStorage.setItem("chatUser", username);
-        window.location.href = "chat.html";
-      }
-    });
-  } else {
-    userRef.once("value", (snap) => {
-      if (!snap.exists()) {
-        error.innerText = "User tidak ditemukan";
-      } else if (snap.val().password !== password) {
-        error.innerText = "Password salah";
-      } else {
-        localStorage.setItem("chatUser", username);
-        window.location.href = "chat.html";
-      }
-    });
-  }
-}
-
-/**************** CHAT ****************/
-const currentUser = localStorage.getItem("chatUser");
-const messagesRef = db.ref("privateChat");
-
-if (currentUser && document.getElementById("messages")) {
-  // 🔥 ADMIN FIX PAKSA
-  const isAdmin = currentUser === "bima033";
-
-  document.getElementById("userDisplay").innerText =
-    "Login sebagai: " + currentUser + (isAdmin ? " 👑" : "");
-
-  // tampil / sembunyi tombol admin (ANTI BUG)
-  setTimeout(() => {
-    const btn = document.querySelector(".danger");
-    if (btn) btn.style.display = isAdmin ? "block" : "none";
-  }, 100);
-
-  window.sendMessage = function () {
-    const input = document.getElementById("message");
-    const text = input.value.trim();
-    if (!text) return;
-
-    messagesRef.push({
-      user: currentUser,
-      text,
-      timestamp: Date.now(),
-    });
-
-    input.value = "";
-  };
-
-  messagesRef.limitToLast(100).on("child_added", (snap) => {
-    const msg = snap.val();
-    const messagesDiv = document.getElementById("messages");
-
-    const wrapper = document.createElement("div");
-    wrapper.className =
-      "msg-wrapper " + (msg.user === currentUser ? "right" : "left");
-
-    const bubble = document.createElement("div");
-    bubble.className = "bubble";
-    bubble.innerHTML = `<strong>${msg.user}</strong><br>${msg.text}`;
-
-    wrapper.appendChild(bubble);
-    messagesDiv.appendChild(wrapper);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  });
-}
-
-/**************** ADMIN ACTION ****************/
-function clearChat() {
-  if (currentUser !== "bima033") {
-    alert("❌ Bukan admin");
-    return;
-  }
-
-  if (confirm("Yakin mau hapus semua chat?")) {
-    messagesRef.remove();
-    document.getElementById("messages").innerHTML = "";
-  }
-}
-
-/**************** MENU ****************/
-function toggleMenu() {
-  document.getElementById("menuPanel").classList.toggle("hidden");
-}
-
-function logout() {
-  localStorage.removeItem("chatUser");
-  window.location.href = "index.html";
-}
-
-/**************** THEME ****************/
-function setTheme(mode) {
-  document.body.classList.remove("light", "dark");
-  document.body.classList.add(mode);
-  localStorage.setItem("chatTheme", mode);
-}
-
-document.body.classList.add(localStorage.getItem("chatTheme") || "light");
+  <script src="script.js"></script>
+</body>
+</html>
